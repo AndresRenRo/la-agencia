@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEEMIO — 5 Design Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#101012;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  ul{list-style:none}
+
+  /* ===== DESIGN SWITCHER ===== */
+  .switcher{position:sticky;top:0;z-index:9999;background:#0c0c0e;border-bottom:1px solid #2a2a30;
+    display:flex;align-items:center;gap:18px;padding:10px 18px;font-family:'Archivo',sans-serif}
+  .switcher__brand{display:flex;flex-direction:column;line-height:1;flex-shrink:0}
+  .switcher__brand b{color:#fff;font-size:13px;letter-spacing:.16em;font-weight:900}
+  .switcher__brand span{color:#6b6b78;font-size:9.5px;letter-spacing:.18em;margin-top:3px;text-transform:uppercase}
+  .switcher__pills{display:flex;gap:7px;overflow-x:auto;flex:1;padding:2px;scrollbar-width:thin}
+  .switcher__pills::-webkit-scrollbar{height:4px}
+  .switcher__pills::-webkit-scrollbar-thumb{background:#2a2a30;border-radius:4px}
+  .pill{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:8px 15px;border-radius:100px;
+    background:#16161a;color:#8a8a96;font-size:12.5px;font-weight:700;letter-spacing:.02em;
+    border:1px solid #232328;transition:.18s ease;white-space:nowrap}
+  .pill:hover{color:#d4d4dc;border-color:#39393f}
+  .pill .num{font-size:10px;opacity:.6;font-family:'Space Mono',monospace}
+  .pill.active{background:#fff;color:#101012;border-color:#fff}
+  .pill.active .num{opacity:.5}
+  .switcher__hint{flex-shrink:0;color:#55555f;font-size:10.5px;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+  .switcher__hint b{color:#9a9aa6}
+
+  /* ===== SCREENS ===== */
+  .screen{display:none;animation:fade .4s ease}
+  .screen.is-active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  @media(max-width:768px){
+    .switcher{gap:12px;padding:9px 12px}
+    .switcher__hint{display:none}
+    .switcher__brand b{font-size:12px}
+  }
+  @media(max-width:600px){
+    .switcher__brand span{display:none}
+    .pill{padding:7px 13px;font-size:12px}
+  }
+  @media(max-width:380px){
+    .switcher{gap:9px;padding:8px 10px}
+    .switcher__brand b{font-size:11px;letter-spacing:.1em}
+    .pill{padding:6px 11px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="switcher">
+  <div class="switcher__brand"><b>BEEMIO</b><span>5 concepts</span></div>
+  <div class="switcher__pills" id="pills">
+    <button class="pill active" data-target="d1"><span class="num">01</span>Brutalist</button>
+    <button class="pill" data-target="d2"><span class="num">02</span>Gradient</button>
+    <button class="pill" data-target="d3"><span class="num">03</span>Editorial</button>
+    <button class="pill" data-target="d4"><span class="num">04</span>Terminal</button>
+    <button class="pill" data-target="d5"><span class="num">05</span>Swiss</button>
+  </div>
+  <div class="switcher__hint"><b>Tip:</b> resize / open on mobile</div>
+</nav>
+
+<main id="screens">
+<section class="screen is-active" id="d1" data-name="Brutalist">
+<style>
+  #d1{--bg:#0a0a0b;--ink:#f6f6f4;--mut:#8a8a82;--acid:#d4ff00;--line:#23231f;font-family:'Archivo',sans-serif;background:var(--bg);color:var(--ink)}
+  #d1 .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  #d1 .disp{font-family:'Archivo Black',sans-serif;text-transform:uppercase;line-height:.92;letter-spacing:-.02em}
+  #d1 .mono{font-family:'Space Mono',monospace}
+  #d1 .acid{color:var(--acid)}
+  /* nav */
+  #d1 .nav{display:flex;justify-content:space-between;align-items:center;padding:26px 40px;border-bottom:1px solid var(--line);max-width:1240px;margin:0 auto}
+  #d1 .nav b{font-family:'Archivo Black';font-size:19px;letter-spacing:.04em}
+  #d1 .nav b i{color:var(--acid);font-style:normal}
+  #d1 .nav__links{display:flex;gap:30px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+  #d1 .nav__links a{color:var(--mut)}#d1 .nav__links a:hover{color:var(--ink)}
+  #d1 .btn{display:inline-block;background:var(--acid);color:#0a0a0b;font-weight:900;text-transform:uppercase;
+    letter-spacing:.04em;padding:14px 24px;font-size:13px;border:2px solid var(--acid);transition:.15s}
+  #d1 .btn:hover{background:transparent;color:var(--acid)}
+  #d1 .btn--ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  #d1 .btn--ghost:hover{border-color:var(--acid);color:var(--acid)}
+  /* hero */
+  #d1 .hero{padding:90px 0 70px;border-bottom:1px solid var(--line)}
+  #d1 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;text-transform:uppercase;
+    letter-spacing:.18em;color:var(--acid);margin-bottom:30px}
+  #d1 .eyebrow::before{content:"";width:34px;height:2px;background:var(--acid)}
+  #d1 .hero h1{font-size:clamp(44px,8.2vw,118px)}
+  #d1 .hero h1 em{font-style:normal;-webkit-text-stroke:2px var(--acid);color:transparent}
+  #d1 .hero p{max-width:560px;margin:34px 0 40px;font-size:18px;line-height:1.55;color:#c9c9c2}
+  #d1 .hero .cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  #d1 .hero .rating{margin-left:6px;font-size:12px;color:var(--mut)}#d1 .hero .rating b{color:var(--ink)}
+  /* marquee */
+  #d1 .strip{border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;background:#0c0c0d}
+  #d1 .strip__t{display:flex;gap:48px;white-space:nowrap;animation:d1m 26s linear infinite;font-family:'Archivo Black';
+    font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:#3a3a36}
+  #d1 .strip__t span{display:flex;gap:48px}#d1 .strip__t i{color:var(--acid);font-style:normal}
+  @keyframes d1m{to{transform:translateX(-50%)}}
+  /* stats */
+  #d1 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+  #d1 .stat{padding:48px 40px;border-right:1px solid var(--line)}
+  #d1 .stat:last-child{border-right:none}
+  #d1 .stat b{display:block;font-family:'Archivo Black';font-size:clamp(38px,4.6vw,64px);line-height:1;color:var(--acid)}
+  #d1 .stat span{display:block;margin-top:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);line-height:1.4}
+  /* section */
+  #d1 .sec{padding:96px 0;border-bottom:1px solid var(--line)}
+  #d1 .sec__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:54px;gap:30px;flex-wrap:wrap}
+  #d1 .sec__head h2{font-size:clamp(30px,4.4vw,58px)}
+  #d1 .sec__head .tag{font-family:'Space Mono';font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
+  /* services */
+  #d1 .svc{border-top:1px solid var(--line)}
+  #d1 .svc__row{display:grid;grid-template-columns:80px 1fr 1.4fr auto;gap:30px;align-items:center;
+    padding:30px 4px;border-bottom:1px solid var(--line);transition:.2s}
+  #d1 .svc__row:hover{background:#101010;padding-left:18px}
+  #d1 .svc__row .n{font-family:'Space Mono';font-size:14px;color:var(--acid)}
+  #d1 .svc__row h3{font-family:'Archivo Black';font-size:22px;text-transform:uppercase}
+  #d1 .svc__row p{color:var(--mut);font-size:15px;line-height:1.5}
+  #d1 .svc__row .arr{font-size:22px;color:var(--mut)}#d1 .svc__row:hover .arr{color:var(--acid)}
+  /* compare */
+  #d1 .cmp{width:100%;border-collapse:collapse;font-size:15px}
+  #d1 .cmp th,#d1 .cmp td{padding:18px 20px;text-align:left;border-bottom:1px solid var(--line)}
+  #d1 .cmp thead th{font-family:'Archivo Black';text-transform:uppercase;font-size:14px;letter-spacing:.04em}
+  #d1 .cmp thead th:nth-child(2){color:var(--acid)}
+  #d1 .cmp td:first-child{color:#cfcfc8}
+  #d1 .cmp .yes{color:var(--acid);font-weight:900}#d1 .cmp .no{color:#55554f}
+  #d1 .cmp tbody tr:hover{background:#0e0e0e}
+  /* pricing */
+  #d1 .price{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line)}
+  #d1 .plan{padding:40px 34px;border-right:1px solid var(--line)}#d1 .plan:last-child{border-right:none}
+  #d1 .plan.feat{background:var(--acid);color:#0a0a0b}
+  #d1 .plan .pn{font-family:'Archivo Black';text-transform:uppercase;font-size:16px;letter-spacing:.05em}
+  #d1 .plan .pp{font-family:'Archivo Black';font-size:46px;margin:18px 0 4px}
+  #d1 .plan .pp small{font-family:'Archivo';font-size:14px;font-weight:500;color:var(--mut)}
+  #d1 .plan.feat .pp small{color:#3a3a10}
+  #d1 .plan ul{margin:24px 0 30px;display:flex;flex-direction:column;gap:12px}
+  #d1 .plan li{font-size:14px;color:#bdbdb6;padding-left:22px;position:relative;line-height:1.45}
+  #d1 .plan li::before{content:"→";position:absolute;left:0;color:var(--acid)}
+  #d1 .plan.feat li{color:#16160a}#d1 .plan.feat li::before{color:#0a0a0b}
+  #d1 .plan .btn{width:100%;text-align:center}
+  #d1 .plan.feat .btn{background:#0a0a0b;color:var(--acid);border-color:#0a0a0b}
+  #d1 .badge{display:inline-block;background:#0a0a0b;color:var(--acid);font-family:'Space Mono';font-size:10px;
+    padding:4px 10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+  /* cta */
+  #d1 .final{padding:120px 0;text-align:center}
+  #d1 .final h2{font-size:clamp(40px,8vw,104px)}
+  #d1 .final p{color:var(--mut);max-width:480px;margin:24px auto 40px;font-size:17px;line-height:1.5}
+  /* footer */
+  #d1 .foot{padding:46px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;
+    max-width:1240px;margin:0 auto;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
+  #d1 .foot b{color:var(--ink);font-family:'Archivo Black'}
+  @media(max-width:1024px){#d1 .stats{grid-template-columns:repeat(2,1fr)}#d1 .stat:nth-child(2){border-right:none}#d1 .stat{border-bottom:1px solid var(--line)}}
+  @media(max-width:768px){
+    #d1 .wrap{padding:0 22px}#d1 .nav{padding:20px 22px}#d1 .nav__links{display:none}
+    #d1 .svc__row{grid-template-columns:40px 1fr;gap:8px 14px}
+    #d1 .svc__row p{grid-column:2}#d1 .svc__row .arr{display:none}
+    #d1 .price{grid-template-columns:1fr}#d1 .plan{border-right:none;border-bottom:1px solid var(--line)}
+    #d1 .cmp thead{display:none}
+    #d1 .cmp tr{display:grid;grid-template-columns:1fr auto auto;border-bottom:1px solid var(--line)}
+    #d1 .cmp td{border:none;padding:14px 12px;font-size:13.5px}
+  }
+  @media(max-width:600px){#d1 .hero{padding:60px 0 50px}#d1 .sec{padding:70px 0}#d1 .stat{padding:34px 22px}}
+  @media(max-width:380px){#d1 .wrap{padding:0 16px}#d1 .nav{padding:18px 16px}#d1 .hero p{font-size:16px}#d1 .btn{padding:13px 18px;font-size:12px}}
+</style>
+
+  <nav class="nav">
+    <b>BEEMI<i>O</i></b>
+    <ul class="nav__links"><li><a href="#d1">Services</a></li><li><a href="#d1">Results</a></li><li><a href="#d1">Pricing</a></li><li><a href="#d1">About</a></li></ul>
+    <a href="#d1" class="btn">Free Audit</a>
+  </nav>
+
+  <header class="hero"><div class="wrap">
+    <span class="eyebrow">Content-led SEO + AI visibility</span>
+    <h1 class="disp">Own the<br>searches that<br><em>move money.</em></h1>
+    <p>A bilingual, nearshore team that turns fintech and crypto brands into the result Google ranks <span class="acid">and AI recommends.</span></p>
+    <div class="cta">
+      <a href="#d1" class="btn">Book a free growth audit</a>
+      <a href="#d1" class="btn btn--ghost">See case studies</a>
+      <span class="rating">★ <b>4.9/5</b> · 40+ engagements</span>
+    </div>
+  </div></header>
+
+  <div class="strip"><div class="strip__t">
+    <span>Fintech <i>◆</i> Crypto &amp; Web3 <i>◆</i> Trading <i>◆</i> Payments <i>◆</i> DeFi <i>◆</i> Investor education <i>◆</i> Neobanks <i>◆</i></span>
+    <span>Fintech <i>◆</i> Crypto &amp; Web3 <i>◆</i> Trading <i>◆</i> Payments <i>◆</i> DeFi <i>◆</i> Investor education <i>◆</i> Neobanks <i>◆</i></span>
+  </div></div>
+
+  <div class="stats">
+    <div class="stat"><b>+593%</b><span>Organic traffic in 12 months</span></div>
+    <div class="stat"><b>+992%</b><span>AI citation growth</span></div>
+    <div class="stat"><b>300+</b><span>Articles shipped / quarter</span></div>
+    <div class="stat"><b>EN·ES</b><span>Bilingual by default</span></div>
+  </div>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec__head"><h2 class="disp">What we do</h2><span class="tag">// full-funnel search</span></div>
+    <div class="svc">
+      <div class="svc__row"><span class="n">01</span><h3>Editorial SEO Engine</h3><p>Specialist content built to rank and convert — in English and Spanish.</p><span class="arr">↗</span></div>
+      <div class="svc__row"><span class="n">02</span><h3>Technical SEO</h3><p>Crawl, schema, Core Web Vitals and architecture, fixed at the root.</p><span class="arr">↗</span></div>
+      <div class="svc__row"><span class="n">03</span><h3>AEO / GEO</h3><p>Become the brand ChatGPT, Gemini &amp; Perplexity cite and recommend.</p><span class="arr">↗</span></div>
+      <div class="svc__row"><span class="n">04</span><h3>Digital PR &amp; Links</h3><p>Authority from real publications and outreach — never link farms.</p><span class="arr">↗</span></div>
+      <div class="svc__row"><span class="n">05</span><h3>Revenue Dashboard</h3><p>GA4 + GSC tied to pipeline. Total transparency, every month.</p><span class="arr">↗</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec__head"><h2 class="disp">Us vs. the<br>generalist agency</h2><span class="tag">// no contest</span></div>
+    <table class="cmp">
+      <thead><tr><th>Capability</th><th>BEEMIO</th><th>Generalist</th></tr></thead>
+      <tbody>
+        <tr><td>Fintech / crypto only</td><td class="yes">✓</td><td class="no">Mixed verticals</td></tr>
+        <tr><td>Bilingual EN / ES content</td><td class="yes">✓</td><td class="no">✕</td></tr>
+        <tr><td>AI visibility (AEO) included</td><td class="yes">✓</td><td class="no">Add-on or none</td></tr>
+        <tr><td>Timezone-aligned team</td><td class="yes">✓</td><td class="no">Offshore lag</td></tr>
+        <tr><td>Revenue-tied reporting</td><td class="yes">✓</td><td class="no">Vanity metrics</td></tr>
+        <tr><td>Month-to-month</td><td class="yes">✓</td><td class="no">12-mo lock-in</td></tr>
+      </tbody>
+    </table>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec__head"><h2 class="disp">Pricing</h2><span class="tag">// month-to-month</span></div>
+    <div class="price">
+      <div class="plan"><div class="pn">Pilot</div><div class="pp">$1,190<small>/mo</small></div><ul><li>4 SEO articles / mo</li><li>Technical audit</li><li>Keyword + AEO map</li><li>Monthly report</li></ul><a href="#d1" class="btn btn--ghost">Start</a></div>
+      <div class="plan feat"><span class="badge">Most popular</span><div class="pn">Engine</div><div class="pp">$2,190<small>/mo</small></div><ul><li>8 articles / mo</li><li>On-page + technical</li><li>AEO/GEO optimization</li><li>Link building</li><li>Dashboard access</li></ul><a href="#d1" class="btn">Start</a></div>
+      <div class="plan"><div class="pn">Scale</div><div class="pp">$3,590<small>/mo</small></div><ul><li>16+ articles / mo</li><li>Full digital PR</li><li>Dedicated strategist</li><li>Bi-weekly calls</li><li>Multi-brand</li></ul><a href="#d1" class="btn btn--ghost">Start</a></div>
+    </div>
+  </div></section>
+
+  <section class="final"><div class="wrap">
+    <h2 class="disp">Let's <span class="acid">rank.</span></h2>
+    <p>Free growth audit of your search and AI visibility. If there's upside, we'll show you the path.</p>
+    <a href="#d1" class="btn">Book a free growth audit</a>
+  </div></section>
+
+  <footer class="foot"><b>BEEMIO</b><span>Content-led SEO &amp; AI visibility · Querétaro · Buenos Aires → US &amp; EU</span><span>hello@beemio.com</span></footer>
+</section>
+<section class="screen" id="d2" data-name="Gradient">
+<style>
+  #d2{--bg:#fbf8f2;--ink:#15110d;--mut:#6f675c;--coral:#ff5a1f;--violet:#6b4dff;--pink:#ff4d8d;--card:#fff;
+    font-family:'Hanken Grotesk',sans-serif;background:var(--bg);color:var(--ink);position:relative;overflow:hidden}
+  #d2 .disp{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;line-height:1.02;letter-spacing:-.03em}
+  #d2 .wrap{max-width:1180px;margin:0 auto;padding:0 36px;position:relative;z-index:2}
+  #d2 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:0;pointer-events:none}
+  #d2 .star{position:absolute;color:var(--coral);font-size:24px;z-index:1;animation:d2spin 9s linear infinite}
+  @keyframes d2spin{to{transform:rotate(360deg)}}
+  /* nav */
+  #d2 .nav{display:flex;justify-content:space-between;align-items:center;max-width:1180px;margin:0 auto;padding:24px 36px;position:relative;z-index:3}
+  #d2 .nav b{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;letter-spacing:-.02em}
+  #d2 .nav__links{display:flex;gap:28px;font-size:14px;font-weight:600}
+  #d2 .nav__links a{color:var(--mut)}#d2 .nav__links a:hover{color:var(--ink)}
+  #d2 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;font-weight:700;
+    padding:14px 26px;border-radius:100px;font-size:14.5px;transition:.18s}
+  #d2 .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(21,17,13,.22)}
+  #d2 .btn--coral{background:var(--coral)}
+  #d2 .btn--ghost{background:transparent;color:var(--ink);border:1.5px solid #e0d8cb}
+  #d2 .btn--ghost:hover{box-shadow:none;border-color:var(--ink)}
+  /* hero */
+  #d2 .hero{padding:64px 0 80px;text-align:center;position:relative}
+  #d2 .pill2{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #ece4d6;border-radius:100px;
+    padding:8px 16px;font-size:13px;font-weight:600;color:var(--mut);margin-bottom:30px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+  #d2 .pill2 .dot{width:7px;height:7px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px rgba(255,90,31,.18)}
+  #d2 .hero h1{font-size:clamp(40px,7.6vw,88px);max-width:14ch;margin:0 auto}
+  #d2 .hero h1 .g{background:linear-gradient(100deg,var(--coral),var(--pink) 50%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  #d2 .hero p{max-width:560px;margin:28px auto 36px;font-size:18.5px;line-height:1.55;color:var(--mut)}
+  #d2 .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  /* logos */
+  #d2 .logos{margin-top:64px;border-top:1px solid #eee3d3;border-bottom:1px solid #eee3d3;padding:26px 0;overflow:hidden}
+  #d2 .logos p{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#b3a994;margin-bottom:18px;font-weight:700}
+  #d2 .logos__t{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;font-family:'Bricolage Grotesque';font-weight:800;font-size:18px;color:#cdc3b0}
+  /* section */
+  #d2 .sec{padding:90px 0}
+  #d2 .center{text-align:center;max-width:660px;margin:0 auto 56px}
+  #d2 .center h2{font-size:clamp(30px,4.6vw,52px)}
+  #d2 .center p{color:var(--mut);font-size:17px;margin-top:16px;line-height:1.55}
+  /* services grid */
+  #d2 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  #d2 .card{background:var(--card);border:1px solid #efe7d8;border-radius:24px;padding:32px 28px;transition:.22s}
+  #d2 .card:hover{transform:translateY(-6px);box-shadow:0 22px 50px rgba(21,17,13,.09);border-color:transparent}
+  #d2 .card .ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:22px;margin-bottom:20px;
+    background:linear-gradient(140deg,#fff1ea,#ffe6f0);color:var(--coral)}
+  #d2 .card h3{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;margin-bottom:10px}
+  #d2 .card p{color:var(--mut);font-size:15px;line-height:1.55}
+  #d2 .card.big{grid-column:span 2;background:linear-gradient(135deg,var(--ink),#332a20);color:#fff}
+  #d2 .card.big .ic{background:rgba(255,255,255,.1);color:var(--coral)}
+  #d2 .card.big p{color:#cfc6b8}
+  /* steps */
+  #d2 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+  #d2 .step{background:var(--card);border:1px solid #efe7d8;border-radius:20px;padding:26px 22px;position:relative}
+  #d2 .step::before{counter-increment:s;content:"0" counter(s);font-family:'Bricolage Grotesque';font-weight:800;
+    font-size:38px;color:#ece2d2;display:block;margin-bottom:10px}
+  #d2 .step h4{font-family:'Bricolage Grotesque';font-weight:800;font-size:16px;margin-bottom:6px}
+  #d2 .step p{font-size:13.5px;color:var(--mut);line-height:1.5}
+  /* pricing */
+  #d2 .price{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+  #d2 .plan{background:var(--card);border:1px solid #efe7d8;border-radius:24px;padding:34px 30px}
+  #d2 .plan.feat{background:linear-gradient(160deg,#fff,#fff6f1);border:2px solid var(--coral);position:relative;box-shadow:0 20px 50px rgba(255,90,31,.14)}
+  #d2 .badge{position:absolute;top:-12px;left:30px;background:var(--coral);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;letter-spacing:.04em}
+  #d2 .plan .pn{font-family:'Bricolage Grotesque';font-weight:800;font-size:18px}
+  #d2 .plan .pp{font-family:'Bricolage Grotesque';font-weight:800;font-size:42px;margin:14px 0 2px}
+  #d2 .plan .pp small{font-size:15px;font-weight:600;color:var(--mut)}
+  #d2 .plan ul{margin:22px 0 26px;display:flex;flex-direction:column;gap:11px}
+  #d2 .plan li{font-size:14.5px;color:#4d463d;padding-left:26px;position:relative;line-height:1.45}
+  #d2 .plan li::before{content:"✓";position:absolute;left:0;color:var(--coral);font-weight:800}
+  #d2 .plan .btn{width:100%;justify-content:center}
+  /* faq */
+  #d2 .faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  #d2 details{background:var(--card);border:1px solid #efe7d8;border-radius:16px;padding:4px 24px;transition:.2s}
+  #d2 details[open]{border-color:var(--coral)}
+  #d2 summary{list-style:none;cursor:pointer;padding:20px 0;font-family:'Bricolage Grotesque';font-weight:700;font-size:17px;display:flex;justify-content:space-between;gap:14px}
+  #d2 summary::-webkit-details-marker{display:none}
+  #d2 summary::after{content:"+";color:var(--coral);font-size:24px;line-height:1}
+  #d2 details[open] summary::after{content:"–"}
+  #d2 details p{padding:0 0 20px;color:var(--mut);font-size:15px;line-height:1.6}
+  /* final */
+  #d2 .final{margin:60px 0;background:linear-gradient(135deg,var(--coral),var(--pink) 60%,var(--violet));border-radius:36px;padding:80px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  #d2 .final h2{font-size:clamp(34px,5.5vw,62px)}
+  #d2 .final p{max-width:460px;margin:18px auto 32px;font-size:17px;opacity:.92;line-height:1.5}
+  #d2 .final .btn{background:#fff;color:var(--ink)}
+  /* footer */
+  #d2 .foot{padding:50px 36px;max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--mut);border-top:1px solid #eee3d3}
+  #d2 .foot b{font-family:'Bricolage Grotesque';font-weight:800;color:var(--ink)}
+  @media(max-width:1024px){#d2 .grid{grid-template-columns:repeat(2,1fr)}#d2 .card.big{grid-column:span 2}#d2 .steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:768px){#d2 .nav__links{display:none}#d2 .wrap{padding:0 22px}#d2 .nav{padding:20px 22px}#d2 .price{grid-template-columns:1fr}#d2 .final{border-radius:24px;padding:60px 26px}}
+  @media(max-width:600px){#d2 .grid{grid-template-columns:1fr}#d2 .card.big{grid-column:span 1}#d2 .steps{grid-template-columns:1fr}#d2 .sec{padding:64px 0}#d2 .hero{padding:44px 0 60px}}
+  @media(max-width:380px){#d2 .wrap{padding:0 16px}#d2 .hero p{font-size:16.5px}#d2 .btn{padding:13px 20px;font-size:13.5px}}
+</style>
+
+  <div class="blob" style="width:380px;height:380px;background:#ffb38a;top:-80px;right:-60px"></div>
+  <div class="blob" style="width:300px;height:300px;background:#c7b4ff;top:340px;left:-90px"></div>
+  <div class="star" style="top:130px;left:8%">✦</div>
+  <div class="star" style="top:90px;right:14%;color:var(--violet)">✦</div>
+
+  <nav class="nav">
+    <b>✦ Beemio</b>
+    <ul class="nav__links"><li><a href="#d2">Solutions</a></li><li><a href="#d2">AI Visibility</a></li><li><a href="#d2">Pricing</a></li><li><a href="#d2">About</a></li></ul>
+    <a href="#d2" class="btn btn--coral">Get my score →</a>
+  </nav>
+
+  <header class="hero"><div class="wrap">
+    <span class="pill2"><span class="dot"></span>From invisible to inevitable — in 90 days</span>
+    <h1 class="disp">We make finance brands the <span class="g">answer.</span></h1>
+    <p>Content-led SEO and AI visibility for fintech &amp; crypto. We turn your brand into the result Google ranks and ChatGPT, Gemini &amp; Perplexity recommend.</p>
+    <div class="cta"><a href="#d2" class="btn btn--coral">Book a free audit →</a><a href="#d2" class="btn btn--ghost">See how it works</a></div>
+  </div>
+    <div class="wrap"><div class="logos"><p>Trusted by fintech &amp; crypto teams</p><div class="logos__t"><span>◆ LedgerPay</span><span>▲ ChainFlow</span><span>● NovaBank</span><span>✦ Yielded</span><span>◇ TradeDesk</span></div></div></div>
+  </header>
+
+  <section class="sec"><div class="wrap">
+    <div class="center"><h2 class="disp">Everything you need to win search.</h2><p>One specialist team for the two places your buyers now search: Google, and the AI that's quietly replacing it.</p></div>
+    <div class="grid">
+      <div class="card big"><div class="ic">✍</div><h3>Editorial SEO Engine</h3><p>Specialist fintech &amp; crypto content, written by people who understand the vertical — and published in English and Spanish. Built to rank, built to convert.</p></div>
+      <div class="card"><div class="ic">⚙</div><h3>Technical SEO</h3><p>Schema, Core Web Vitals, architecture and crawl health — fixed properly.</p></div>
+      <div class="card"><div class="ic">✦</div><h3>AEO / GEO</h3><p>Get cited and recommended by ChatGPT, Gemini, Perplexity &amp; Claude.</p></div>
+      <div class="card"><div class="ic">🔗</div><h3>Digital PR &amp; Links</h3><p>Authority from real publications and earned outreach. No link farms.</p></div>
+      <div class="card"><div class="ic">📊</div><h3>Revenue Dashboard</h3><p>GA4 + GSC tied to pipeline, live and transparent every month.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec" style="background:#f4eee2"><div class="wrap">
+    <div class="center"><h2 class="disp">How we work</h2><p>A clear, repeatable system — the same one whether you're one brand or ten.</p></div>
+    <div class="steps">
+      <div class="step"><h4>Radiografía</h4><p>We measure your visibility across Google and every major AI engine.</p></div>
+      <div class="step"><h4>Strategy</h4><p>A roadmap built on gaps, intent and revenue — not vanity keywords.</p></div>
+      <div class="step"><h4>Production</h4><p>Bilingual content + technical + AEO, shipped on a steady cadence.</p></div>
+      <div class="step"><h4>Monitoring</h4><p>Dashboards, alerts and monthly calls to keep the advantage.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center"><h2 class="disp">Plans for every team.</h2><p>Month-to-month. Cancel anytime. Results compound.</p></div>
+    <div class="price">
+      <div class="plan"><div class="pn">Pilot</div><div class="pp">$1,190<small>/mo</small></div><ul><li>4 SEO articles / mo</li><li>Technical audit</li><li>Keyword + AEO map</li><li>Monthly report</li></ul><a href="#d2" class="btn btn--ghost">Start</a></div>
+      <div class="plan feat"><span class="badge">Most popular</span><div class="pn">Engine</div><div class="pp">$2,190<small>/mo</small></div><ul><li>8 articles / mo</li><li>On-page + technical</li><li>AEO / GEO optimization</li><li>Link building</li><li>Live dashboard</li></ul><a href="#d2" class="btn btn--coral">Start</a></div>
+      <div class="plan"><div class="pn">Scale</div><div class="pp">$3,590<small>/mo</small></div><ul><li>16+ articles / mo</li><li>Full digital PR</li><li>Dedicated strategist</li><li>Bi-weekly calls</li><li>Multi-brand</li></ul><a href="#d2" class="btn btn--ghost">Start</a></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center"><h2 class="disp">Questions?</h2></div>
+    <div class="faq">
+      <details open><summary>What exactly is AEO?</summary><p>Answer Engine Optimization makes your brand the one AI tools mention and recommend when buyers ask. As search shifts to ChatGPT, Gemini and Perplexity, it's now as important as ranking on Google — and most agencies don't offer it.</p></details>
+      <details><summary>How is this different from a generalist agency?</summary><p>We only work with fintech, crypto and finance brands, we write natively in English and Spanish, and AI visibility is included in every plan — not a vague add-on.</p></details>
+      <details><summary>How long until results?</summary><p>First signals typically appear in 30–60 days, with meaningful movement by 90. Exact timing depends on your starting point and how competitive your category is.</p></details>
+      <details><summary>Do you write in both English and Spanish?</summary><p>Yes — bilingual is our default, not an upsell. Ideal for brands selling across the US, LATAM and Europe.</p></details>
+    </div>
+  </div></section>
+
+  <div class="wrap"><section class="final">
+    <h2 class="disp">Ready to be the answer?</h2>
+    <p>Get a free audit of your search and AI visibility, plus a 90-day action plan.</p>
+    <a href="#d2" class="btn">Book my free audit →</a>
+  </section></div>
+
+  <footer class="foot"><b>✦ Beemio</b><span>SEO &amp; AI visibility for fintech · Querétaro &amp; Buenos Aires → worldwide</span><span>hello@beemio.com</span></footer>
+</section>
+<section class="screen" id="d3" data-name="Editorial">
+<style>
+  #d3{--bg:#f3efe6;--paper:#faf8f2;--ink:#191713;--mut:#6c655a;--ox:#8a2b22;--line:#d8d1c2;
+    font-family:'Newsreader',serif;background:var(--bg);color:var(--ink)}
+  #d3 .fr{font-family:'Fraunces',serif}
+  #d3 .wrap{max-width:1100px;margin:0 auto;padding:0 44px}
+  #d3 .rule{height:1px;background:var(--line);max-width:1100px;margin:0 auto}
+  /* nav */
+  #d3 .nav{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;padding:28px 44px}
+  #d3 .nav b{font-family:'Fraunces';font-weight:500;font-size:24px;letter-spacing:.01em}
+  #d3 .nav__links{display:flex;gap:32px;font-size:15px;font-style:italic}
+  #d3 .nav__links a{color:var(--mut)}#d3 .nav__links a:hover{color:var(--ox)}
+  #d3 .lnk{display:inline-block;font-style:italic;font-size:15px;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:.2s}
+  #d3 .lnk:hover{color:var(--ox);border-color:var(--ox)}
+  #d3 .btn{display:inline-block;background:var(--ink);color:var(--paper);font-family:'Fraunces';font-weight:500;
+    font-size:16px;padding:14px 30px;border-radius:2px;transition:.2s}
+  #d3 .btn:hover{background:var(--ox)}
+  /* hero */
+  #d3 .hero{padding:80px 0 64px;text-align:center}
+  #d3 .kicker{font-size:13px;text-transform:uppercase;letter-spacing:.26em;color:var(--ox);margin-bottom:34px}
+  #d3 .hero h1{font-family:'Fraunces';font-weight:400;font-size:clamp(42px,7vw,90px);line-height:1.02;letter-spacing:-.01em;max-width:16ch;margin:0 auto}
+  #d3 .hero h1 em{font-style:italic;color:var(--ox)}
+  #d3 .hero p{max-width:540px;margin:30px auto 36px;font-size:20px;line-height:1.6;color:var(--mut)}
+  #d3 .hero .meta{margin-top:30px;font-size:13px;text-transform:uppercase;letter-spacing:.18em;color:#a59c8c}
+  /* feature row */
+  #d3 .feat{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  #d3 .feat div{padding:40px 30px;border-right:1px solid var(--line);text-align:center}
+  #d3 .feat div:last-child{border-right:none}
+  #d3 .feat b{font-family:'Fraunces';font-weight:500;font-size:52px;display:block;line-height:1}
+  #d3 .feat span{display:block;margin-top:12px;font-style:italic;font-size:15px;color:var(--mut)}
+  /* section */
+  #d3 .sec{padding:88px 0}
+  #d3 .lead{display:grid;grid-template-columns:1fr 1.5fr;gap:50px;margin-bottom:54px;align-items:end}
+  #d3 .lead h2{font-family:'Fraunces';font-weight:400;font-size:clamp(28px,4vw,46px);line-height:1.05}
+  #d3 .lead h2 em{font-style:italic;color:var(--ox)}
+  #d3 .lead p{font-size:18px;line-height:1.6;color:var(--mut)}
+  /* services as editorial list */
+  #d3 .svc{border-top:1px solid var(--line)}
+  #d3 .svc__item{display:grid;grid-template-columns:60px 1fr 1.3fr;gap:30px;padding:32px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  #d3 .svc__item .n{font-family:'Fraunces';font-style:italic;font-size:20px;color:var(--ox)}
+  #d3 .svc__item h3{font-family:'Fraunces';font-weight:500;font-size:25px}
+  #d3 .svc__item p{font-size:16.5px;line-height:1.6;color:var(--mut)}
+  /* pull quote */
+  #d3 .quote{padding:90px 0;text-align:center}
+  #d3 .quote blockquote{font-family:'Fraunces';font-weight:400;font-size:clamp(26px,3.8vw,42px);line-height:1.25;max-width:18ch;margin:0 auto}
+  #d3 .quote blockquote em{font-style:italic;color:var(--ox)}
+  #d3 .quote cite{display:block;margin-top:28px;font-style:normal;font-size:13px;text-transform:uppercase;letter-spacing:.18em;color:#a59c8c}
+  /* pricing editorial */
+  #d3 .price{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--paper)}
+  #d3 .plan{padding:42px 34px;border-right:1px solid var(--line)}#d3 .plan:last-child{border-right:none}
+  #d3 .plan.feat{background:var(--ink);color:var(--paper)}
+  #d3 .plan .pn{font-family:'Fraunces';font-style:italic;font-size:22px;color:var(--ox)}
+  #d3 .plan.feat .pn{color:#e9b6ad}
+  #d3 .plan .pp{font-family:'Fraunces';font-weight:400;font-size:50px;margin:16px 0 6px;line-height:1}
+  #d3 .plan .pp small{font-size:15px;font-style:italic;color:var(--mut)}
+  #d3 .plan.feat .pp small{color:#b9b1a3}
+  #d3 .plan ul{margin:22px 0 28px;display:flex;flex-direction:column;gap:12px}
+  #d3 .plan li{font-size:15.5px;color:var(--mut);padding-left:20px;position:relative;line-height:1.5}
+  #d3 .plan.feat li{color:#c8c0b2}
+  #d3 .plan li::before{content:"—";position:absolute;left:0;color:var(--ox)}
+  #d3 .plan .btn{display:block;text-align:center}
+  #d3 .plan.feat .btn{background:var(--paper);color:var(--ink)}#d3 .plan.feat .btn:hover{background:var(--ox);color:#fff}
+  /* final */
+  #d3 .final{padding:100px 0;text-align:center;border-top:1px solid var(--line)}
+  #d3 .final h2{font-family:'Fraunces';font-weight:400;font-size:clamp(34px,5.5vw,64px);line-height:1.05}
+  #d3 .final h2 em{font-style:italic;color:var(--ox)}
+  #d3 .final p{font-size:18px;color:var(--mut);max-width:440px;margin:22px auto 34px;line-height:1.6}
+  /* footer */
+  #d3 .foot{padding:44px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    border-top:1px solid var(--line);font-size:14px;font-style:italic;color:var(--mut)}
+  #d3 .foot b{font-family:'Fraunces';font-style:normal;color:var(--ink)}
+  @media(max-width:900px){#d3 .lead{grid-template-columns:1fr;gap:20px}#d3 .svc__item{grid-template-columns:40px 1fr}#d3 .svc__item p{grid-column:2}}
+  @media(max-width:768px){#d3 .nav__links{display:none}#d3 .wrap{padding:0 26px}#d3 .nav{padding:22px 26px}#d3 .price{grid-template-columns:1fr}#d3 .plan{border-right:none;border-bottom:1px solid var(--line)}#d3 .feat{grid-template-columns:1fr}#d3 .feat div{border-right:none;border-bottom:1px solid var(--line)}}
+  @media(max-width:600px){#d3 .sec{padding:64px 0}#d3 .hero{padding:54px 0 48px}#d3 .quote{padding:64px 0}}
+  @media(max-width:380px){#d3 .wrap{padding:0 18px}#d3 .hero p{font-size:18px}#d3 .feat b{font-size:44px}}
+</style>
+
+  <nav class="nav">
+    <b>Beemio</b>
+    <ul class="nav__links"><li><a href="#d3">Services</a></li><li><a href="#d3">Work</a></li><li><a href="#d3">Pricing</a></li><li><a href="#d3">Journal</a></li></ul>
+    <a href="#d3" class="lnk">Book an audit →</a>
+  </nav>
+  <div class="rule"></div>
+
+  <header class="hero"><div class="wrap">
+    <p class="kicker">Editorial SEO &middot; Fintech &amp; Crypto</p>
+    <h1 class="fr">The search results your competitors <em>can't buy.</em></h1>
+    <p>We build the kind of authority that compounds — specialist, bilingual content that earns its rank and gets your brand cited by the AI everyone now asks.</p>
+    <a href="#d3" class="btn">Request a free growth audit</a>
+    <p class="meta">Querétaro &middot; Buenos Aires &middot; Working in your timezone</p>
+  </div></header>
+
+  <div class="feat">
+    <div><b class="fr">593%</b><span>organic growth in a year</span></div>
+    <div><b class="fr">EN·ES</b><span>written, not translated</span></div>
+    <div><b class="fr">90 days</b><span>to first AI citations</span></div>
+  </div>
+
+  <section class="sec"><div class="wrap">
+    <div class="lead">
+      <h2 class="fr">A craft<br><em>discipline,</em><br>not a content mill.</h2>
+      <p>Most agencies treat SEO content as a commodity measured by word count. We treat it as editorial work — researched, argued, and written by specialists who understand fintech and crypto. That's the difference between traffic and trust.</p>
+    </div>
+    <div class="svc">
+      <div class="svc__item"><span class="n fr">i</span><h3 class="fr">Editorial SEO Engine</h3><p>Long-form, expert content built to rank and convert — published natively in English and Spanish.</p></div>
+      <div class="svc__item"><span class="n fr">ii</span><h3 class="fr">Technical Foundation</h3><p>Schema, Core Web Vitals, architecture and crawl health, handled at the root.</p></div>
+      <div class="svc__item"><span class="n fr">iii</span><h3 class="fr">AI Visibility (AEO)</h3><p>Structured so ChatGPT, Gemini and Perplexity cite and recommend your brand.</p></div>
+      <div class="svc__item"><span class="n fr">iv</span><h3 class="fr">Digital PR &amp; Links</h3><p>Authority earned through real publications and considered outreach.</p></div>
+      <div class="svc__item"><span class="n fr">v</span><h3 class="fr">Transparent Reporting</h3><p>A dashboard that ties organic performance back to revenue, monthly.</p></div>
+    </div>
+  </div></section>
+
+  <section class="quote" style="background:var(--paper)"><div class="wrap">
+    <blockquote class="fr">"They write like insiders, and rank like <em>specialists.</em>"</blockquote>
+    <cite>— Head of Growth, fintech client (placeholder)</cite>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lead"><h2 class="fr">Engagements</h2><p>Month-to-month, because the work should keep you — not a contract.</p></div>
+    <div class="price">
+      <div class="plan"><div class="pn fr">Pilot</div><div class="pp fr">$1,190<small> /mo</small></div><ul><li>4 articles monthly</li><li>Technical audit</li><li>Keyword &amp; AEO map</li><li>Monthly report</li></ul><a href="#d3" class="btn">Begin</a></div>
+      <div class="plan feat"><div class="pn fr">Engine</div><div class="pp fr">$2,190<small> /mo</small></div><ul><li>8 articles monthly</li><li>On-page &amp; technical</li><li>AEO / GEO optimization</li><li>Link building</li><li>Live dashboard</li></ul><a href="#d3" class="btn">Begin</a></div>
+      <div class="plan"><div class="pn fr">Scale</div><div class="pp fr">$3,590<small> /mo</small></div><ul><li>16+ articles monthly</li><li>Full digital PR</li><li>Dedicated strategist</li><li>Bi-weekly calls</li><li>Multi-brand</li></ul><a href="#d3" class="btn">Begin</a></div>
+    </div>
+  </div></section>
+
+  <section class="final"><div class="wrap">
+    <h2 class="fr">Let's make your brand<br>the <em>obvious answer.</em></h2>
+    <p>A free, tailored audit of where your next readers — and customers — should come from.</p>
+    <a href="#d3" class="btn">Request a free growth audit</a>
+  </div></section>
+
+  <footer class="foot"><b>Beemio</b><span>Editorial SEO &amp; AI visibility for finance brands</span><span>hello@beemio.com</span></footer>
+</section>
+<section class="screen" id="d4" data-name="Terminal">
+<style>
+  #d4{--bg:#0a0e0c;--panel:#0f1512;--ink:#dfe7e0;--mut:#6c7a70;--grn:#27f59a;--amb:#ffb84d;--line:#1c2620;
+    font-family:'IBM Plex Mono',monospace;background:var(--bg);color:var(--ink);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:46px 46px;background-position:center}
+  #d4 .sans{font-family:'IBM Plex Sans',sans-serif}
+  #d4 .wrap{max-width:1160px;margin:0 auto;padding:0 36px}
+  #d4 .grn{color:var(--grn)}#d4 .amb{color:var(--amb)}#d4 .mut{color:var(--mut)}
+  /* nav */
+  #d4 .nav{display:flex;justify-content:space-between;align-items:center;max-width:1160px;margin:0 auto;padding:20px 36px;border-bottom:1px solid var(--line);background:rgba(10,14,12,.8);backdrop-filter:blur(6px)}
+  #d4 .nav b{font-size:16px;font-weight:600;letter-spacing:.02em}#d4 .nav b::before{content:"▮ ";color:var(--grn)}
+  #d4 .nav__links{display:flex;gap:26px;font-size:13px;color:var(--mut)}
+  #d4 .nav__links a:hover{color:var(--grn)}#d4 .nav__links a::before{content:"/";color:#33433a;margin-right:4px}
+  #d4 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--grn);color:#04130b;font-weight:600;
+    padding:11px 20px;font-size:13px;border-radius:3px;transition:.15s;font-family:'IBM Plex Mono'}
+  #d4 .btn:hover{box-shadow:0 0 0 1px var(--grn),0 0 24px rgba(39,245,154,.35)}
+  #d4 .btn--ghost{background:transparent;color:var(--grn);border:1px solid #234034}
+  #d4 .btn--ghost:hover{border-color:var(--grn);box-shadow:none}
+  /* hero */
+  #d4 .hero{padding:80px 0 60px}
+  #d4 .term{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:560px;margin-bottom:42px}
+  #d4 .term__bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:#0c120f}
+  #d4 .term__bar i{width:11px;height:11px;border-radius:50%;background:#26302a;display:block}
+  #d4 .term__bar i:first-child{background:#ff5f56}#d4 .term__bar i:nth-child(2){background:#ffbd2e}#d4 .term__bar i:nth-child(3){background:#27c93f}
+  #d4 .term__bar span{margin-left:8px;font-size:12px;color:var(--mut)}
+  #d4 .term__body{padding:20px 18px;font-size:13.5px;line-height:1.9}
+  #d4 .term__body .p{color:var(--grn)}#d4 .term__body .c{color:#7d8b80}
+  #d4 .term__body .out{color:var(--ink)}
+  #d4 .cur{display:inline-block;width:8px;height:15px;background:var(--grn);vertical-align:-2px;animation:d4b 1.1s steps(1) infinite}
+  @keyframes d4b{50%{opacity:0}}
+  #d4 .hero h1{font-family:'IBM Plex Sans';font-weight:700;font-size:clamp(38px,6.6vw,76px);line-height:1.02;letter-spacing:-.03em;max-width:15ch}
+  #d4 .hero h1 .grn{color:var(--grn)}
+  #d4 .hero p{font-family:'IBM Plex Sans';max-width:540px;margin:26px 0 34px;font-size:18px;line-height:1.55;color:#aab5ad}
+  #d4 .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  /* stat bar */
+  #d4 .bar{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  #d4 .bar div{padding:26px 24px;border-right:1px solid var(--line)}#d4 .bar div:last-child{border-right:none}
+  #d4 .bar b{font-size:30px;color:var(--grn);display:block}
+  #d4 .bar span{font-size:12px;color:var(--mut);display:block;margin-top:6px}
+  /* section */
+  #d4 .sec{padding:84px 0}
+  #d4 .label{font-size:12px;color:var(--mut);letter-spacing:.08em;margin-bottom:14px}
+  #d4 .label::before{content:"// ";color:var(--grn)}
+  #d4 .sec h2{font-family:'IBM Plex Sans';font-weight:700;font-size:clamp(28px,4.2vw,46px);letter-spacing:-.02em;margin-bottom:44px}
+  /* services as cards */
+  #d4 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  #d4 .cell{background:var(--bg);padding:30px 26px;transition:.18s}
+  #d4 .cell:hover{background:var(--panel)}
+  #d4 .cell .k{font-size:12px;color:var(--grn);margin-bottom:16px}
+  #d4 .cell h3{font-family:'IBM Plex Sans';font-weight:600;font-size:19px;margin-bottom:10px}
+  #d4 .cell p{font-family:'IBM Plex Sans';font-size:14.5px;color:#9aa69c;line-height:1.55}
+  /* compare */
+  #d4 .cmp{width:100%;border-collapse:collapse;font-size:14px;border:1px solid var(--line)}
+  #d4 .cmp th,#d4 .cmp td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+  #d4 .cmp th:last-child,#d4 .cmp td:last-child{border-right:none}
+  #d4 .cmp thead{background:var(--panel)}
+  #d4 .cmp thead th{font-family:'IBM Plex Sans';font-weight:600}
+  #d4 .cmp thead th:nth-child(2){color:var(--grn)}
+  #d4 .cmp .y{color:var(--grn)}#d4 .cmp .n{color:#4a564e}
+  /* pricing */
+  #d4 .price{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  #d4 .plan{background:var(--bg);padding:32px 28px}
+  #d4 .plan.feat{background:var(--panel);box-shadow:inset 0 0 0 1px var(--grn)}
+  #d4 .plan .pn{font-size:13px;color:var(--grn)}#d4 .plan .pn::before{content:"$ "}
+  #d4 .plan .pp{font-family:'IBM Plex Sans';font-weight:700;font-size:38px;margin:14px 0 4px}
+  #d4 .plan .pp small{font-family:'IBM Plex Mono';font-size:13px;font-weight:400;color:var(--mut)}
+  #d4 .plan ul{margin:20px 0 24px;display:flex;flex-direction:column;gap:10px}
+  #d4 .plan li{font-family:'IBM Plex Sans';font-size:14px;color:#9aa69c;padding-left:20px;position:relative;line-height:1.45}
+  #d4 .plan li::before{content:"›";position:absolute;left:0;color:var(--grn)}
+  #d4 .plan .btn{width:100%;justify-content:center}
+  #d4 .tag{display:inline-block;font-size:11px;color:var(--amb);border:1px solid #4a3a18;padding:3px 9px;border-radius:3px;margin-bottom:12px}
+  #d4 .tag::before{content:"★ "}
+  /* final */
+  #d4 .final{padding:96px 0;text-align:center}
+  #d4 .final h2{font-family:'IBM Plex Sans';font-weight:700;font-size:clamp(32px,5.4vw,58px);letter-spacing:-.02em}
+  #d4 .final h2 .grn{color:var(--grn)}
+  #d4 .final p{font-family:'IBM Plex Sans';color:#9aa69c;max-width:460px;margin:20px auto 32px;font-size:17px;line-height:1.55}
+  /* footer */
+  #d4 .foot{padding:30px 36px;max-width:1160px;margin:0 auto;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--mut)}
+  #d4 .foot b{color:var(--ink)}#d4 .foot b::before{content:"▮ ";color:var(--grn)}
+  @media(max-width:1024px){#d4 .grid{grid-template-columns:repeat(2,1fr)}#d4 .bar{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:768px){#d4 .nav__links{display:none}#d4 .wrap{padding:0 22px}#d4 .nav{padding:18px 22px}#d4 .grid{grid-template-columns:1fr}#d4 .price{grid-template-columns:1fr}
+    #d4 .cmp thead{display:none}#d4 .cmp tr{display:grid;grid-template-columns:1fr auto auto}#d4 .cmp td{border-right:none;font-size:13px;padding:12px 14px}}
+  @media(max-width:600px){#d4 .sec{padding:60px 0}#d4 .hero{padding:54px 0 48px}#d4 .bar{grid-template-columns:1fr}#d4 .bar div{border-right:none;border-bottom:1px solid var(--line)}}
+  @media(max-width:380px){#d4 .wrap{padding:0 16px}#d4 .term{max-width:100%}#d4 .hero p{font-size:16px}}
+</style>
+
+  <nav class="nav">
+    <b>beemio</b>
+    <ul class="nav__links"><li><a href="#d4">services</a></li><li><a href="#d4">results</a></li><li><a href="#d4">pricing</a></li><li><a href="#d4">docs</a></li></ul>
+    <a href="#d4" class="btn">run audit →</a>
+  </nav>
+
+  <header class="hero"><div class="wrap">
+    <div class="term">
+      <div class="term__bar"><i></i><i></i><i></i><span>beemio — visibility-check</span></div>
+      <div class="term__body">
+        <div><span class="c">$</span> <span class="p">beemio</span> scan --brand=yourco --engines=all</div>
+        <div class="c"># crawling google + chatgpt + gemini + perplexity...</div>
+        <div class="out">→ google rank ........ <span class="amb">page 3</span></div>
+        <div class="out">→ ai citations ....... <span class="amb">0 / 12 queries</span></div>
+        <div class="out">→ opportunity ........ <span class="grn">high</span></div>
+        <div><span class="c">$</span> <span class="cur"></span></div>
+      </div>
+    </div>
+    <h1>Rank on Google. <span class="grn">Get cited</span> by the AI.</h1>
+    <p>Content-led SEO and AI visibility for fintech &amp; crypto brands — engineered by a bilingual team that ships in your timezone.</p>
+    <div class="cta"><a href="#d4" class="btn">Run a free audit →</a><a href="#d4" class="btn btn--ghost">View case studies</a></div>
+  </div></header>
+
+  <div class="bar">
+    <div><b>+593%</b><span>organic traffic / 12mo</span></div>
+    <div><b>+992%</b><span>ai citation growth</span></div>
+    <div><b>300+</b><span>articles / quarter</span></div>
+    <div><b>EN·ES</b><span>bilingual native</span></div>
+  </div>
+
+  <section class="sec"><div class="wrap">
+    <div class="label">capabilities</div>
+    <h2>The full search stack.</h2>
+    <div class="grid">
+      <div class="cell"><div class="k">[01]</div><h3>Editorial SEO Engine</h3><p>Specialist content that ranks &amp; converts, in English and Spanish.</p></div>
+      <div class="cell"><div class="k">[02]</div><h3>Technical SEO</h3><p>Schema, Core Web Vitals, architecture, crawl — fixed at the root.</p></div>
+      <div class="cell"><div class="k">[03]</div><h3>AEO / GEO</h3><p>Become the brand ChatGPT, Gemini &amp; Perplexity cite by default.</p></div>
+      <div class="cell"><div class="k">[04]</div><h3>Digital PR &amp; Links</h3><p>Authority from real publications and earned outreach.</p></div>
+      <div class="cell"><div class="k">[05]</div><h3>Revenue Dashboard</h3><p>GA4 + GSC piped to pipeline. Transparent, live, monthly.</p></div>
+      <div class="cell"><div class="k">[06]</div><h3>Multi-brand Ops</h3><p>Run several brands in parallel on one repeatable system.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="label">diff beemio generalist</div>
+    <h2>Why not a generalist?</h2>
+    <table class="cmp">
+      <thead><tr><th>capability</th><th>beemio</th><th>generalist</th></tr></thead>
+      <tbody>
+        <tr><td>fintech / crypto only</td><td class="y">true</td><td class="n">false</td></tr>
+        <tr><td>bilingual EN/ES</td><td class="y">true</td><td class="n">false</td></tr>
+        <tr><td>ai visibility included</td><td class="y">true</td><td class="n">false</td></tr>
+        <tr><td>timezone-aligned</td><td class="y">true</td><td class="n">offshore lag</td></tr>
+        <tr><td>revenue reporting</td><td class="y">true</td><td class="n">vanity</td></tr>
+        <tr><td>month-to-month</td><td class="y">true</td><td class="n">12mo lock</td></tr>
+      </tbody>
+    </table>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="label">pricing — month to month</div>
+    <h2>Pick your throughput.</h2>
+    <div class="price">
+      <div class="plan"><div class="pn">pilot</div><div class="pp">1,190<small>/mo</small></div><ul><li>4 articles / mo</li><li>technical audit</li><li>keyword + aeo map</li><li>monthly report</li></ul><a href="#d4" class="btn btn--ghost">init</a></div>
+      <div class="plan feat"><span class="tag">most popular</span><div class="pn">engine</div><div class="pp">2,190<small>/mo</small></div><ul><li>8 articles / mo</li><li>on-page + technical</li><li>aeo / geo</li><li>link building</li><li>live dashboard</li></ul><a href="#d4" class="btn">init</a></div>
+      <div class="plan"><div class="pn">scale</div><div class="pp">3,590<small>/mo</small></div><ul><li>16+ articles / mo</li><li>full digital pr</li><li>dedicated strategist</li><li>bi-weekly calls</li><li>multi-brand</li></ul><a href="#d4" class="btn btn--ghost">init</a></div>
+    </div>
+  </div></section>
+
+  <section class="final"><div class="wrap">
+    <h2>Ready to <span class="grn">deploy?</span></h2>
+    <p>Free audit of your search + AI visibility, with a prioritized 90-day roadmap.</p>
+    <a href="#d4" class="btn">Run a free audit →</a>
+  </div></section>
+
+  <footer class="foot"><b>beemio</b><span>seo + ai visibility · fintech/crypto · MX &amp; AR → US/EU</span><span>hello@beemio.com</span></footer>
+</section>
+<section class="screen" id="d5" data-name="Swiss">
+<style>
+  #d5{--bg:#ffffff;--ink:#0c0c0d;--mut:#717179;--blue:#1735ff;--line:#e6e6e8;--soft:#f5f5f6;
+    font-family:'Schibsted Grotesk',sans-serif;background:var(--bg);color:var(--ink);letter-spacing:-.01em}
+  #d5 .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  #d5 .blue{color:var(--blue)}
+  /* nav */
+  #d5 .nav{display:flex;justify-content:space-between;align-items:center;max-width:1240px;margin:0 auto;padding:24px 40px;border-bottom:1px solid var(--ink)}
+  #d5 .nav b{font-weight:900;font-size:19px;letter-spacing:-.03em}
+  #d5 .nav b sup{color:var(--blue);font-size:11px}
+  #d5 .nav__links{display:flex;gap:30px;font-size:14px;font-weight:500}
+  #d5 .nav__links a{color:var(--mut)}#d5 .nav__links a:hover{color:var(--ink)}
+  #d5 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;
+    padding:13px 24px;font-size:14px;border-radius:0;transition:.16s}
+  #d5 .btn:hover{background:var(--ink)}
+  #d5 .btn--dark{background:var(--ink)}#d5 .btn--dark:hover{background:var(--blue)}
+  #d5 .btn--out{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+  #d5 .btn--out:hover{background:var(--ink);color:#fff}
+  /* hero */
+  #d5 .hero{display:grid;grid-template-columns:1.3fr 1fr;border-bottom:1px solid var(--ink)}
+  #d5 .hero__l{padding:80px 40px 70px;border-right:1px solid var(--ink)}
+  #d5 .hero__r{padding:80px 40px 70px;display:flex;flex-direction:column;justify-content:space-between;gap:30px;background:var(--soft)}
+  #d5 .idx{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:34px;display:flex;gap:14px}
+  #d5 .idx b{color:var(--blue)}
+  #d5 .hero h1{font-weight:900;font-size:clamp(40px,6.4vw,82px);line-height:.98;letter-spacing:-.04em}
+  #d5 .hero h1 span{color:var(--blue)}
+  #d5 .hero p{max-width:46ch;margin:30px 0 36px;font-size:18px;line-height:1.5;color:#3c3c42}
+  #d5 .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  #d5 .hr-stat b{font-weight:900;font-size:clamp(44px,5vw,72px);line-height:1;letter-spacing:-.04em;display:block}
+  #d5 .hr-stat span{font-size:14px;color:var(--mut);display:block;margin-top:8px}
+  #d5 .hr-stat+.hr-stat{margin-top:26px;padding-top:26px;border-top:1px solid var(--line)}
+  /* logos row */
+  #d5 .logos{border-bottom:1px solid var(--ink);display:grid;grid-template-columns:auto 1fr;align-items:center}
+  #d5 .logos .lab{padding:18px 40px;border-right:1px solid var(--line);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--mut)}
+  #d5 .logos .row{display:flex;gap:44px;padding:18px 40px;font-weight:900;font-size:17px;color:#c4c4ca;flex-wrap:wrap}
+  /* section */
+  #d5 .sec{border-bottom:1px solid var(--ink)}
+  #d5 .sechd{display:grid;grid-template-columns:1.3fr 1fr;border-bottom:1px solid var(--line)}
+  #d5 .sechd div:first-child{padding:46px 40px;border-right:1px solid var(--line)}
+  #d5 .sechd div:last-child{padding:46px 40px;display:flex;align-items:flex-end}
+  #d5 .sechd h2{font-weight:900;font-size:clamp(28px,4.4vw,52px);line-height:1;letter-spacing:-.03em}
+  #d5 .sechd p{font-size:16px;color:var(--mut);line-height:1.5}
+  /* services grid */
+  #d5 .svc{display:grid;grid-template-columns:repeat(3,1fr)}
+  #d5 .svc div{padding:38px 34px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:230px;display:flex;flex-direction:column;transition:.18s}
+  #d5 .svc div:hover{background:var(--soft)}
+  #d5 .svc .num{font-weight:900;font-size:14px;color:var(--blue);margin-bottom:auto}
+  #d5 .svc h3{font-weight:700;font-size:21px;margin:0 0 10px;letter-spacing:-.02em}
+  #d5 .svc p{font-size:14.5px;color:var(--mut);line-height:1.5}
+  /* pricing */
+  #d5 .price{display:grid;grid-template-columns:repeat(3,1fr)}
+  #d5 .plan{padding:40px 34px;border-right:1px solid var(--line)}#d5 .plan:last-child{border-right:none}
+  #d5 .plan.feat{background:var(--ink);color:#fff}
+  #d5 .plan .pn{font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+  #d5 .plan.feat .pn{color:#9b9bff}
+  #d5 .plan .pp{font-weight:900;font-size:46px;letter-spacing:-.04em;margin:16px 0 4px;line-height:1}
+  #d5 .plan .pp small{font-size:15px;font-weight:500;color:var(--mut)}
+  #d5 .plan ul{margin:22px 0 28px;display:flex;flex-direction:column;gap:11px}
+  #d5 .plan li{font-size:14.5px;color:#46464d;padding-left:22px;position:relative;line-height:1.45}
+  #d5 .plan.feat li{color:#c7c7cf}
+  #d5 .plan li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;background:var(--blue)}
+  #d5 .plan .btn{width:100%;justify-content:center}
+  #d5 .plan.feat .btn{background:#fff;color:var(--ink)}#d5 .plan.feat .btn:hover{background:var(--blue);color:#fff}
+  #d5 .tag{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  /* final */
+  #d5 .final{display:grid;grid-template-columns:1.3fr 1fr;border-bottom:1px solid var(--ink)}
+  #d5 .final__l{padding:80px 40px;border-right:1px solid var(--ink)}
+  #d5 .final__l h2{font-weight:900;font-size:clamp(34px,5vw,62px);line-height:1;letter-spacing:-.04em}
+  #d5 .final__l h2 span{color:var(--blue)}
+  #d5 .final__l p{margin:22px 0 32px;font-size:17px;color:#3c3c42;max-width:42ch;line-height:1.5}
+  #d5 .final__r{padding:80px 40px;background:var(--blue);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:14px}
+  #d5 .final__r .big{font-weight:900;font-size:clamp(30px,4vw,46px);line-height:1;letter-spacing:-.03em}
+  #d5 .final__r span{font-size:15px;opacity:.85}
+  /* footer */
+  #d5 .foot{padding:34px 40px;max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--mut)}
+  #d5 .foot b{font-weight:900;color:var(--ink)}
+  @media(max-width:1024px){#d5 .svc{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:860px){
+    #d5 .hero,#d5 .final{grid-template-columns:1fr}#d5 .hero__l,#d5 .final__l{border-right:none;border-bottom:1px solid var(--line)}
+    #d5 .sechd{grid-template-columns:1fr}#d5 .sechd div:first-child{border-right:none;border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:768px){#d5 .nav__links{display:none}#d5 .wrap{padding:0 22px}#d5 .nav{padding:20px 22px}#d5 .price{grid-template-columns:1fr}#d5 .plan{border-right:none;border-bottom:1px solid var(--line)}
+    #d5 .hero__l,#d5 .hero__r,#d5 .final__l,#d5 .final__r{padding:54px 24px}#d5 .logos{grid-template-columns:1fr}#d5 .logos .lab{border-right:none;border-bottom:1px solid var(--line)}}
+  @media(max-width:600px){#d5 .svc{grid-template-columns:1fr}#d5 .svc div{min-height:0;border-right:none}#d5 .sechd div{padding:34px 24px}}
+  @media(max-width:380px){#d5 .hero__l,#d5 .hero__r,#d5 .final__l,#d5 .final__r{padding:42px 18px}#d5 .hero p{font-size:16px}}
+</style>
+
+  <nav class="nav">
+    <b>BEEMIO<sup>®</sup></b>
+    <ul class="nav__links"><li><a href="#d5">Services</a></li><li><a href="#d5">Results</a></li><li><a href="#d5">Pricing</a></li><li><a href="#d5">About</a></li></ul>
+    <a href="#d5" class="btn">Free audit</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero__l">
+      <div class="idx"><span>Content-led SEO</span><b>+</b><span>AI visibility</span></div>
+      <h1>The search results competitors <span>can't buy.</span></h1>
+      <p>A bilingual, nearshore team that turns fintech and crypto brands into the result Google ranks and AI engines recommend.</p>
+      <div class="cta"><a href="#d5" class="btn">Book a free audit</a><a href="#d5" class="btn btn--out">Case studies</a></div>
+    </div>
+    <div class="hero__r">
+      <div class="hr-stat"><b>+593<span style="font-size:.5em">%</span></b><span>Organic traffic growth, 12 months</span></div>
+      <div class="hr-stat"><b>+992<span style="font-size:.5em">%</span></b><span>AI citation growth</span></div>
+    </div>
+  </header>
+
+  <div class="logos">
+    <div class="lab">Working with</div>
+    <div class="row"><span>LedgerPay</span><span>ChainFlow</span><span>NovaBank</span><span>Yielded</span><span>TradeDesk</span></div>
+  </div>
+
+  <section class="sec">
+    <div class="sechd"><div><h2>Services</h2></div><div><p>One specialist team for the full search stack — built for fintech &amp; crypto, delivered in English and Spanish.</p></div></div>
+    <div class="svc">
+      <div><span class="num">01</span><h3>Editorial SEO Engine</h3><p>Specialist content built to rank and convert, written natively in EN &amp; ES.</p></div>
+      <div><span class="num">02</span><h3>Technical SEO</h3><p>Schema, Core Web Vitals, architecture and crawl health — fixed at the root.</p></div>
+      <div><span class="num">03</span><h3>AEO / GEO</h3><p>Become the brand ChatGPT, Gemini &amp; Perplexity cite and recommend.</p></div>
+      <div><span class="num">04</span><h3>Digital PR &amp; Links</h3><p>Authority from real publications and earned outreach — never link farms.</p></div>
+      <div><span class="num">05</span><h3>Revenue Dashboard</h3><p>GA4 + GSC tied to pipeline. Transparent reporting, every month.</p></div>
+      <div><span class="num">06</span><h3>Multi-brand Ops</h3><p>Run several brands in parallel on one repeatable production system.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sechd"><div><h2>Pricing</h2></div><div><p>Transparent tiers, month-to-month. No long lock-ins — results keep you, not contracts.</p></div></div>
+    <div class="price">
+      <div class="plan"><div class="pn">Pilot</div><div class="pp">$1,190<small>/mo</small></div><ul><li>4 SEO articles / mo</li><li>Technical audit</li><li>Keyword + AEO map</li><li>Monthly report</li></ul><a href="#d5" class="btn btn--out">Start</a></div>
+      <div class="plan feat"><span class="tag">Most popular</span><div class="pn">Engine</div><div class="pp">$2,190<small>/mo</small></div><ul><li>8 articles / mo</li><li>On-page + technical</li><li>AEO / GEO optimization</li><li>Link building</li><li>Live dashboard</li></ul><a href="#d5" class="btn">Start</a></div>
+      <div class="plan"><div class="pn">Scale</div><div class="pp">$3,590<small>/mo</small></div><ul><li>16+ articles / mo</li><li>Full digital PR</li><li>Dedicated strategist</li><li>Bi-weekly calls</li><li>Multi-brand</li></ul><a href="#d5" class="btn btn--out">Start</a></div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="final__l">
+      <h2>Become the <span>obvious</span> answer.</h2>
+      <p>A free, tailored audit of your search and AI visibility — plus a prioritized 90-day plan.</p>
+      <a href="#d5" class="btn btn--dark">Book a free growth audit</a>
+    </div>
+    <div class="final__r">
+      <div class="big">90 days</div>
+      <span>to first measurable AI citations</span>
+      <div class="big" style="margin-top:20px">EN · ES</div>
+      <span>bilingual by default, in your timezone</span>
+    </div>
+  </section>
+
+  <footer class="foot"><b>BEEMIO®</b><span>SEO &amp; AI visibility for fintech · Querétaro &amp; Buenos Aires → US &amp; EU</span><span>hello@beemio.com</span></footer>
+</section>
+</main>
+
+<script>
+  (function(){
+    const pills=[...document.querySelectorAll('.pill')];
+    const screens=[...document.querySelectorAll('.screen')];
+    function show(id){
+      screens.forEach(s=>s.classList.toggle('is-active',s.id===id));
+      pills.forEach(p=>p.classList.toggle('active',p.dataset.target===id));
+      window.scrollTo({top:0,behavior:'instant'});
+      if(history.replaceState)history.replaceState(null,'','#'+id);
+    }
+    pills.forEach(p=>p.addEventListener('click',()=>show(p.dataset.target)));
+    const initial=(location.hash||'').replace('#','');
+    if(screens.some(s=>s.id===initial))show(initial);
+  })();
+</script>
+</body>
+</html>
