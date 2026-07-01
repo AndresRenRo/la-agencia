@@ -132,8 +132,8 @@
   .gb .fine{max-width:520px;margin:16px auto 0;font-size:12.5px;opacity:.72;line-height:1.5}
 
   /* pricing */
-  .price{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
-  .plan{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px}
+  .price{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column}
   .plan.feat{border:2px solid var(--indigo);position:relative;box-shadow:0 16px 40px rgba(79,70,229,.14)}
   .plan .pn{font-weight:800;font-size:16px;color:var(--ink)}
   .plan .job{font-size:13px;color:var(--mut);margin-top:5px;line-height:1.4;min-height:2.6em}
@@ -143,7 +143,7 @@
   .plan ul{margin:18px 0 22px;display:flex;flex-direction:column;gap:9px}
   .plan li{font-size:14px;color:#3d3f5c;padding-left:24px;position:relative;line-height:1.4}
   .plan li::before{content:"✓";position:absolute;left:0;color:var(--indigo);font-weight:800}
-  .plan .btn{width:100%}
+  .plan .btn{width:100%;margin-top:auto}
   .plan:not(.feat) .btn{background:#e9e8fd;color:var(--indigo);box-shadow:none}
   .plan:not(.feat) .btn:hover{background:#dedcfb;transform:translateY(-1px)}
   .badge{position:absolute;top:-12px;left:24px;background:var(--indigo);color:#fff;font-size:11px;font-weight:700;
