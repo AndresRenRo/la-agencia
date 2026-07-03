@@ -102,6 +102,11 @@
   .trust .flag{font-size:12px;font-weight:800;color:var(--indigo);background:#e9e8fd;padding:4px 9px;border-radius:6px;flex-shrink:0}
   .trust span{font-size:13px;color:var(--mut);line-height:1.4}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .success{text-align:center;padding:20px 6px 6px;animation:fadeIn .3s ease}
+  .success__ic{width:52px;height:52px;border-radius:50%;background:#e3f5ea;color:var(--grn);display:grid;place-items:center;font-size:24px;font-weight:800;margin:0 auto 14px}
+  .success h3{font-weight:800;font-size:20px;letter-spacing:-.02em;margin-bottom:8px}
+  .success p{color:var(--mut);font-size:14.5px;line-height:1.55}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
   /* specialisms strip (replaces the old fake-logo "trusted by" row) */
   .pstrip{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -199,11 +204,12 @@
             <h2>Claim your free audit</h2>
             <p class="sub">Takes 30 seconds. We reply within 24 hours.</p>
             <!--
-              TODO before launch: point action= to a real form handler.
-              Easy options: Formspree (formspree.io), Tally, or your CRM's endpoint.
-              The honeypot field below quietly filters bots — leave it hidden.
+              Wired to Formspree (form ID: mjgqplpk). Submissions arrive by email
+              + in the Formspree dashboard. The honeypot below quietly filters bots.
+              First submission triggers a one-time Formspree confirmation email — confirm it.
             -->
-            <form action="https://formspree.io/f/REPLACE_ME" method="POST">
+            <form id="audit-form" action="https://formspree.io/f/mjgqplpk" method="POST">
+              <input type="hidden" name="_subject" value="New free-audit request — Beemio">
               <label for="name">Name</label>
               <input class="inp" id="name" name="name" type="text" placeholder="Your name" required autocomplete="name">
 
@@ -218,6 +224,12 @@
               <button class="btn" type="submit">Get my free audit</button>
               <p class="micro"><b>No credit card. No commitment. No sales pitch.</b></p>
             </form>
+
+            <div id="audit-success" class="success" hidden>
+              <div class="success__ic" aria-hidden="true">✓</div>
+              <h3>Thanks — we've got it.</h3>
+              <p>We'll review your site and reply within 24 hours. Check your inbox (and spam, just in case).</p>
+            </div>
             <div class="trust">
               <span class="flag">EN·ES</span>
               <span>Bilingual specialists in fintech &amp; crypto — writing natively in English and Spanish, working in your timezone.</span>
@@ -347,6 +359,37 @@
         if (target) target.scrollIntoView({behavior:'smooth', block:'center'});
       });
     });
+
+    // Formspree AJAX submit: no page reload, inline thank-you, graceful errors.
+    var auditForm = document.getElementById('audit-form');
+    if (auditForm) {
+      auditForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        var btn = auditForm.querySelector('button[type="submit"]');
+        var label = btn.textContent;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        fetch(auditForm.action, {
+          method: 'POST',
+          body: new FormData(auditForm),
+          headers: { 'Accept': 'application/json' }
+        }).then(function(res){
+          if (res.ok) {
+            auditForm.hidden = true;
+            var ok = document.getElementById('audit-success');
+            if (ok) ok.hidden = false;
+          } else {
+            return res.json().then(function(d){
+              var msg = ((d && d.errors) || []).map(function(x){return x.message;}).join(', ');
+              alert(msg || 'Something went wrong. Please email hello@beemio.io');
+              btn.disabled = false; btn.textContent = label;
+            });
+          }
+        }).catch(function(){
+          alert('No connection. Please email hello@beemio.io');
+          btn.disabled = false; btn.textContent = label;
+        });
+      });
+    }
   </script>
 
 </body>
