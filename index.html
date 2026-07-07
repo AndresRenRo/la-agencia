@@ -9,6 +9,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Beemio">
 <link rel="canonical" href="https://beemio.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='44' font-family='Arial,Helvetica,sans-serif' font-size='36' font-weight='800' fill='%23fff' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website">
@@ -229,6 +230,49 @@
   @media(max-width:768px){.nav__links{display:none}.wrap{padding:0 22px}.nav{padding:18px 22px}.price{grid-template-columns:1fr}}
   @media(max-width:600px){.sec{padding:50px 0}.hero{padding:34px 0 44px}.formcard{padding:26px}.gb{padding:38px 24px}}
   @media(max-width:380px){.wrap{padding:0 16px}.hero p{font-size:16.5px}}
+  /* how we work (process) */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:step}
+  .pstep{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;position:relative;
+    transition:transform .18s,box-shadow .18s,border-color .18s}
+  .pstep:hover{transform:translateY(-4px);border-color:#d5d2f5;box-shadow:0 14px 34px rgba(20,21,46,.07)}
+  .pstep::before{counter-increment:step;content:counter(step);width:30px;height:30px;border-radius:9px;
+    background:#e9e8fd;color:var(--indigo);font-weight:800;font-size:14px;display:grid;place-items:center;margin-bottom:14px}
+  .pstep h3{font-weight:700;font-size:16.5px;letter-spacing:-.01em;margin-bottom:7px}
+  .pstep p{color:var(--mut);font-size:13.5px;line-height:1.55}
+  .pstep .when{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;color:var(--indigo);
+    background:#e9e8fd;padding:3px 9px;border-radius:100px}
+
+  /* founders */
+  .team{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:820px;margin:0 auto}
+  .member{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;display:flex;gap:16px;
+    align-items:flex-start;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .member:hover{transform:translateY(-4px);border-color:#d5d2f5;box-shadow:0 14px 34px rgba(20,21,46,.07)}
+  .member .av{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--indigo),#8b83ff);
+    color:#fff;font-weight:800;font-size:21px;display:grid;place-items:center;flex-shrink:0}
+  .member h3{font-weight:800;font-size:18px;letter-spacing:-.01em}
+  .member .role{font-size:13px;font-weight:700;color:var(--indigo);margin:3px 0 8px}
+  .member p{color:var(--mut);font-size:14px;line-height:1.6}
+  .team__note{text-align:center;margin-top:20px;font-size:13.5px;color:var(--mut)}
+  .team__note b{color:var(--ink)}
+
+  /* big footer */
+  .bigfoot{border-top:1px solid var(--line);margin-top:50px;background:var(--card)}
+  .bigfoot__in{max-width:1140px;margin:0 auto;padding:44px 34px 30px;display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;gap:34px}
+  .bigfoot .brandcol b{font-weight:800;font-size:19px}
+  .bigfoot .brandcol b span{color:var(--indigo)}
+  .bigfoot .brandcol p{color:var(--mut);font-size:13.5px;line-height:1.6;margin-top:10px;max-width:34ch}
+  .bigfoot h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px}
+  .bigfoot ul{display:flex;flex-direction:column;gap:9px}
+  .bigfoot ul a{font-size:14px;font-weight:500;color:#3d3f5c}
+  .bigfoot ul a:hover{color:var(--indigo)}
+  .bigfoot__bar{border-top:1px solid var(--line)}
+  .bigfoot__bar div{max-width:1140px;margin:0 auto;padding:16px 34px;display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--mut)}
+  @media(max-width:880px){.process{grid-template-columns:1fr 1fr}.team{grid-template-columns:1fr}
+    .bigfoot__in{grid-template-columns:1fr;gap:26px}}
+  @media(max-width:520px){.process{grid-template-columns:1fr}}
+
   /* ============================================================
      ELEVATION LAYER — orchestrated hero + quiet micro-polish.
      All GPU-friendly (transform/opacity only), zero libraries.
@@ -317,6 +361,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#guarantee">Guarantee</a></li>
         <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#team">About</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <a href="#audit" class="btn">Free audit</a>
@@ -417,6 +462,37 @@
       </div>
     </section>
 
+    <section class="sec" id="process" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec__t">
+          <h2>How we work</h2>
+          <p>A clear, repeatable system — you always know what's happening and what's next.</p>
+        </div>
+        <div class="process">
+          <div class="pstep">
+            <h3>Audit</h3>
+            <p>We measure where you stand on Google and across ChatGPT, Gemini, Perplexity and Claude — technical, content and AI visibility.</p>
+            <span class="when">Week 1–2</span>
+          </div>
+          <div class="pstep">
+            <h3>Roadmap</h3>
+            <p>A prioritized 90-day plan built on gaps, intent and revenue potential. We agree on targets before any work starts.</p>
+            <span class="when">Week 2</span>
+          </div>
+          <div class="pstep">
+            <h3>Production</h3>
+            <p>Bilingual content, technical fixes and AEO/GEO ship on a steady cadence — you see everything as it goes live.</p>
+            <span class="when">Ongoing</span>
+          </div>
+          <div class="pstep">
+            <h3>Reporting</h3>
+            <p>A live dashboard ties the work to traffic, citations and pipeline. Monthly strategy calls keep the plan honest.</p>
+            <span class="when">Every month</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="sec" id="guarantee" style="padding-top:0">
       <div class="wrap">
         <div class="gb">
@@ -481,6 +557,34 @@
       </div>
     </section>
 
+    <section class="sec" id="team" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec__t">
+          <h2>Who's behind Beemio</h2>
+          <p>A two-founder team — small on purpose. You work with us, not with a rotating account layer.</p>
+        </div>
+        <div class="team">
+          <div class="member">
+            <div class="av">A</div>
+            <div>
+              <h3>Andrés</h3>
+              <div class="role">Co-founder · SEO &amp; Content</div>
+              <p>Leads strategy, technical SEO and every piece of content — written natively in English and Spanish. If it ranks or gets cited, it went through him.</p>
+            </div>
+          </div>
+          <div class="member">
+            <div class="av">K</div>
+            <div>
+              <h3>Kevin</h3>
+              <div class="role">Co-founder · Growth &amp; Partnerships</div>
+              <p>Your first call and your main contact. Leads partnerships, walks you through your audit, and makes sure the work always maps to your goals.</p>
+            </div>
+          </div>
+        </div>
+        <p class="team__note">Based in <b>Mexico &amp; Argentina</b>, working in US and European timezones — <b>bilingual by default.</b></p>
+      </div>
+    </section>
+
     <section class="sec" id="faq" style="padding-top:0">
       <div class="wrap">
         <div class="sec__t">
@@ -509,10 +613,37 @@
     </section>
   </main>
 
-  <footer class="foot">
-    <b>Beemio</b>
-    <span>SEO &amp; AI visibility for fintech &amp; crypto · Mexico &amp; Argentina → US/EU</span>
-    <a href="mailto:hello@beemio.io">hello@beemio.io</a>
+  <footer class="bigfoot">
+    <div class="bigfoot__in">
+      <div class="brandcol">
+        <b>Beem<span>io</span></b>
+        <p>SEO &amp; AI visibility for fintech &amp; crypto brands. Ranked on Google, cited by the AI — bilingual (EN/ES), from Mexico &amp; Argentina to the US and Europe.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">How we work</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#team">About</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="#audit">Free growth audit</a></li>
+          <li><a href="mailto:hello@beemio.io">hello@beemio.io</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bigfoot__bar">
+      <div>
+        <span>© 2026 Beemio. All rights reserved.</span>
+        <span>Month-to-month, always. The work keeps you — not a contract.</span>
+      </div>
+    </div>
   </footer>
 
   <script>
@@ -546,7 +677,8 @@
     }
 
     // Formspree AJAX submit: no page reload, inline thank-you, graceful errors.
-    var auditForm = document.getElementById('audit-form');    if (auditForm) {
+    var auditForm = document.getElementById('audit-form');
+    if (auditForm) {
       auditForm.addEventListener('submit', function(e){
         e.preventDefault();
         var btn = auditForm.querySelector('button[type="submit"]');

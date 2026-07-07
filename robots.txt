@@ -1,0 +1,6 @@
+# Audits under /audit/ are kept out of search via noindex (meta + X-Robots-Tag),
+# which requires crawling to be allowed — so no Disallow here. That's intentional.
+User-agent: *
+Allow: /
+
+Sitemap: https://beemio.io/sitemap.xml
